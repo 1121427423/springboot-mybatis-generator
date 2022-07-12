@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upking.mybatis.generator.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.upking.mybatis.generator.domain.table.SysUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="side_mode" jdbcType="VARCHAR" property="sideMode" />
+    <result column="header_img" jdbcType="VARCHAR" property="headerImg" />
+    <result column="base_color" jdbcType="VARCHAR" property="baseColor" />
+    <result column="active_color" jdbcType="VARCHAR" property="activeColor" />
+    <result column="authority_id" jdbcType="VARCHAR" property="authorityId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, created_at, updated_at, deleted_at, uuid, username, password, nick_name, side_mode, 
+    header_img, base_color, active_color, authority_id, phone, email
+  </sql>
+  <select id="selectByExample" parameterType="com.upking.mybatis.generator.domain.table.SysUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_users
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_users
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.upking.mybatis.generator.domain.table.SysUserExample">
+    delete from sys_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.upking.mybatis.generator.domain.table.SysUser">
+    insert into sys_users (id, created_at, updated_at, 
+      deleted_at, uuid, username, 
+      password, nick_name, side_mode, 
+      header_img, base_color, active_color, 
+      authority_id, phone, email
+      )
+    values (#{id,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{deletedAt,jdbcType=TIMESTAMP}, #{uuid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{sideMode,jdbcType=VARCHAR}, 
+      #{headerImg,jdbcType=VARCHAR}, #{baseColor,jdbcType=VARCHAR}, #{activeColor,jdbcType=VARCHAR}, 
+      #{authorityId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.upking.mybatis.generator.domain.table.SysUser">
+    insert into sys_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="sideMode != null">
+        side_mode,
+      </if>
+      <if test="headerImg != null">
+        header_img,
+      </if>
+      <if test="baseColor != null">
+        base_color,
+      </if>
+      <if test="activeColor != null">
+        active_color,
+      </if>
+      <if test="authorityId != null">
+        authority_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sideMode != null">
+        #{sideMode,jdbcType=VARCHAR},
+      </if>
+      <if test="headerImg != null">
+        #{headerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="baseColor != null">
+        #{baseColor,jdbcType=VARCHAR},
+      </if>
+      <if test="activeColor != null">
+        #{activeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityId != null">
+        #{authorityId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.upking.mybatis.generator.domain.table.SysUserExample" resultType="java.lang.Long">
+    select count(*) from sys_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_users
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=BIGINT},
+      </if>
+      <if test="row.createdAt != null">
+        created_at = #{row.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.updatedAt != null">
+        updated_at = #{row.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.deletedAt != null">
+        deleted_at = #{row.deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.uuid != null">
+        uuid = #{row.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="row.username != null">
+        username = #{row.username,jdbcType=VARCHAR},
+      </if>
+      <if test="row.password != null">
+        password = #{row.password,jdbcType=VARCHAR},
+      </if>
+      <if test="row.nickName != null">
+        nick_name = #{row.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.sideMode != null">
+        side_mode = #{row.sideMode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.headerImg != null">
+        header_img = #{row.headerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="row.baseColor != null">
+        base_color = #{row.baseColor,jdbcType=VARCHAR},
+      </if>
+      <if test="row.activeColor != null">
+        active_color = #{row.activeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="row.authorityId != null">
+        authority_id = #{row.authorityId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.phone != null">
+        phone = #{row.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="row.email != null">
+        email = #{row.email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_users
+    set id = #{row.id,jdbcType=BIGINT},
+      created_at = #{row.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{row.updatedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{row.deletedAt,jdbcType=TIMESTAMP},
+      uuid = #{row.uuid,jdbcType=VARCHAR},
+      username = #{row.username,jdbcType=VARCHAR},
+      password = #{row.password,jdbcType=VARCHAR},
+      nick_name = #{row.nickName,jdbcType=VARCHAR},
+      side_mode = #{row.sideMode,jdbcType=VARCHAR},
+      header_img = #{row.headerImg,jdbcType=VARCHAR},
+      base_color = #{row.baseColor,jdbcType=VARCHAR},
+      active_color = #{row.activeColor,jdbcType=VARCHAR},
+      authority_id = #{row.authorityId,jdbcType=VARCHAR},
+      phone = #{row.phone,jdbcType=VARCHAR},
+      email = #{row.email,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upking.mybatis.generator.domain.table.SysUser">
+    update sys_users
+    <set>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sideMode != null">
+        side_mode = #{sideMode,jdbcType=VARCHAR},
+      </if>
+      <if test="headerImg != null">
+        header_img = #{headerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="baseColor != null">
+        base_color = #{baseColor,jdbcType=VARCHAR},
+      </if>
+      <if test="activeColor != null">
+        active_color = #{activeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityId != null">
+        authority_id = #{authorityId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upking.mybatis.generator.domain.table.SysUser">
+    update sys_users
+    set created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      side_mode = #{sideMode,jdbcType=VARCHAR},
+      header_img = #{headerImg,jdbcType=VARCHAR},
+      base_color = #{baseColor,jdbcType=VARCHAR},
+      active_color = #{activeColor,jdbcType=VARCHAR},
+      authority_id = #{authorityId,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.upking.mybatis.generator.domain.table.SysUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="side_mode" jdbcType="VARCHAR" property="sideMode" />
+    <result column="header_img" jdbcType="VARCHAR" property="headerImg" />
+    <result column="base_color" jdbcType="VARCHAR" property="baseColor" />
+    <result column="active_color" jdbcType="VARCHAR" property="activeColor" />
+    <result column="authority_id" jdbcType="VARCHAR" property="authorityId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, created_at, updated_at, deleted_at, uuid, username, password, nick_name, side_mode, 
+    header_img, base_color, active_color, authority_id, phone, email
+  </sql>
+  <select id="selectByExample" parameterType="com.upking.mybatis.generator.domain.table.SysUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_users
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_users
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.upking.mybatis.generator.domain.table.SysUserExample">
+    delete from sys_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.upking.mybatis.generator.domain.table.SysUser">
+    insert into sys_users (id, created_at, updated_at, 
+      deleted_at, uuid, username, 
+      password, nick_name, side_mode, 
+      header_img, base_color, active_color, 
+      authority_id, phone, email
+      )
+    values (#{id,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{deletedAt,jdbcType=TIMESTAMP}, #{uuid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{sideMode,jdbcType=VARCHAR}, 
+      #{headerImg,jdbcType=VARCHAR}, #{baseColor,jdbcType=VARCHAR}, #{activeColor,jdbcType=VARCHAR}, 
+      #{authorityId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.upking.mybatis.generator.domain.table.SysUser">
+    insert into sys_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="sideMode != null">
+        side_mode,
+      </if>
+      <if test="headerImg != null">
+        header_img,
+      </if>
+      <if test="baseColor != null">
+        base_color,
+      </if>
+      <if test="activeColor != null">
+        active_color,
+      </if>
+      <if test="authorityId != null">
+        authority_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sideMode != null">
+        #{sideMode,jdbcType=VARCHAR},
+      </if>
+      <if test="headerImg != null">
+        #{headerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="baseColor != null">
+        #{baseColor,jdbcType=VARCHAR},
+      </if>
+      <if test="activeColor != null">
+        #{activeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityId != null">
+        #{authorityId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.upking.mybatis.generator.domain.table.SysUserExample" resultType="java.lang.Long">
+    select count(*) from sys_users
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_users
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletedAt != null">
+        deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uuid != null">
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sideMode != null">
+        side_mode = #{record.sideMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerImg != null">
+        header_img = #{record.headerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baseColor != null">
+        base_color = #{record.baseColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activeColor != null">
+        active_color = #{record.activeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorityId != null">
+        authority_id = #{record.authorityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_users
+    set id = #{record.id,jdbcType=BIGINT},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{record.deletedAt,jdbcType=TIMESTAMP},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      side_mode = #{record.sideMode,jdbcType=VARCHAR},
+      header_img = #{record.headerImg,jdbcType=VARCHAR},
+      base_color = #{record.baseColor,jdbcType=VARCHAR},
+      active_color = #{record.activeColor,jdbcType=VARCHAR},
+      authority_id = #{record.authorityId,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upking.mybatis.generator.domain.table.SysUser">
+    update sys_users
+    <set>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sideMode != null">
+        side_mode = #{sideMode,jdbcType=VARCHAR},
+      </if>
+      <if test="headerImg != null">
+        header_img = #{headerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="baseColor != null">
+        base_color = #{baseColor,jdbcType=VARCHAR},
+      </if>
+      <if test="activeColor != null">
+        active_color = #{activeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityId != null">
+        authority_id = #{authorityId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upking.mybatis.generator.domain.table.SysUser">
+    update sys_users
+    set created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      side_mode = #{sideMode,jdbcType=VARCHAR},
+      header_img = #{headerImg,jdbcType=VARCHAR},
+      base_color = #{baseColor,jdbcType=VARCHAR},
+      active_color = #{activeColor,jdbcType=VARCHAR},
+      authority_id = #{authorityId,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
