@@ -17,3 +17,13 @@ spring:
     # 数据库用户名&密码：
     username: root1111
     password: 123456
+
+#下面这些内容是为了让MyBatis映射
+#指定Mybatis的Mapper文件
+mybatis:
+  mapper-locations: classpath:mapper/*xml
+  #指定Mybatis的实体目录
+  type-aliases-package: com.upking.mybatis.generator.domain.table
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
