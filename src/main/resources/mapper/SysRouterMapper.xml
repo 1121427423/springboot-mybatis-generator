@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upking.mybatis.generator.mapper.SysRouterMapper">
+  <resultMap id="BaseResultMap" type="com.upking.mybatis.generator.domain.SysRouter">
+    <id column="router_id" jdbcType="BIGINT" property="routerId" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="api_group" jdbcType="VARCHAR" property="apiGroup" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    router_id, created_at, updated_at, deleted_at, `path`, description, api_group, `method`
+  </sql>
+
+  <select id="selectRouterRoleByUserId" resultType="SysRouter">
+    select
+    <include refid="Base_Column_List" />
+    from sys_router
+  </select>
+
+  <select id="selectRouterList" resultType="SysRouter">
+    select
+    <include refid="Base_Column_List" />
+    from sys_router
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_router
+    where router_id = #{routerId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_router
+    where router_id = #{routerId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="SysRouter">
+    insert into sys_router (router_id, created_at, updated_at, 
+      deleted_at, path, description, 
+      api_group, method)
+    values (#{routerId,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{deletedAt,jdbcType=TIMESTAMP}, #{path,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{apiGroup,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="SysRouter">
+    insert into sys_router
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="routerId != null">
+        router_id,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="apiGroup != null">
+        api_group,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="routerId != null">
+        #{routerId,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="apiGroup != null">
+        #{apiGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="SysRouter">
+    update sys_router
+    <set>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="apiGroup != null">
+        api_group = #{apiGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where router_id = #{routerId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="SysRouter">
+    update sys_router
+    set created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      path = #{path,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      api_group = #{apiGroup,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR}
+    where router_id = #{routerId,jdbcType=BIGINT}
+  </update>
+</mapper>

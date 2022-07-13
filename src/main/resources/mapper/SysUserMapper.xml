@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upking.mybatis.generator.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.upking.mybatis.generator.domain.SysUser">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="deleted_at" jdbcType="TIMESTAMP" property="deletedAt" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="side_mode" jdbcType="VARCHAR" property="sideMode" />
+    <result column="header_img" jdbcType="VARCHAR" property="headerImg" />
+    <result column="base_color" jdbcType="VARCHAR" property="baseColor" />
+    <result column="active_color" jdbcType="VARCHAR" property="activeColor" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, created_at, updated_at, deleted_at, uuid, username, password, nick_name, 
+    side_mode, header_img, base_color, active_color, role_id, phone, email
+  </sql>
+
+  <sql id="User_info">
+    user_id, uuid, username, password, nick_name, side_mode, header_img, base_color,
+    active_color, role_id, phone, email, create_at
+  </sql>
+
+  <select id="selectUserByUsername" parameterType="String" resultType="SysUser">
+    select
+      <include refid="User_info"></include>
+      from sys_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectUserList" resultType="SysUser">
+    select
+    <include refid="User_info"></include>
+    from sys_user
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.upking.mybatis.generator.domain.SysUser">
+    insert into sys_user (user_id, created_at, updated_at, 
+      deleted_at, uuid, username, 
+      password, nick_name, side_mode, 
+      header_img, base_color, active_color, 
+      role_id, phone, email
+      )
+    values (#{userId,jdbcType=BIGINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{deletedAt,jdbcType=TIMESTAMP}, #{uuid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{sideMode,jdbcType=VARCHAR}, 
+      #{headerImg,jdbcType=VARCHAR}, #{baseColor,jdbcType=VARCHAR}, #{activeColor,jdbcType=VARCHAR}, 
+      #{authorityId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.upking.mybatis.generator.domain.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="deletedAt != null">
+        deleted_at,
+      </if>
+      <if test="uuid != null">
+        uuid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="sideMode != null">
+        side_mode,
+      </if>
+      <if test="headerImg != null">
+        header_img,
+      </if>
+      <if test="baseColor != null">
+        base_color,
+      </if>
+      <if test="activeColor != null">
+        active_color,
+      </if>
+      <if test="authorityId != null">
+        role_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sideMode != null">
+        #{sideMode,jdbcType=VARCHAR},
+      </if>
+      <if test="headerImg != null">
+        #{headerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="baseColor != null">
+        #{baseColor,jdbcType=VARCHAR},
+      </if>
+      <if test="activeColor != null">
+        #{activeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityId != null">
+        #{authorityId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.upking.mybatis.generator.domain.SysUser">
+    update sys_user
+    <set>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletedAt != null">
+        deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sideMode != null">
+        side_mode = #{sideMode,jdbcType=VARCHAR},
+      </if>
+      <if test="headerImg != null">
+        header_img = #{headerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="baseColor != null">
+        base_color = #{baseColor,jdbcType=VARCHAR},
+      </if>
+      <if test="activeColor != null">
+        active_color = #{activeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="authorityId != null">
+        role_id = #{authorityId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.upking.mybatis.generator.domain.SysUser">
+    update sys_user
+    set created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted_at = #{deletedAt,jdbcType=TIMESTAMP},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      side_mode = #{sideMode,jdbcType=VARCHAR},
+      header_img = #{headerImg,jdbcType=VARCHAR},
+      base_color = #{baseColor,jdbcType=VARCHAR},
+      active_color = #{activeColor,jdbcType=VARCHAR},
+      role_id = #{authorityId,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>
